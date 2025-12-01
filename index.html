@@ -1,239 +1,394 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Java Primitive Types - Complete Guide</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Java Notes — Up to OOPs</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f0f0f; color: #e0e0e0; line-height: 1.6; }
-        header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 2rem; text-align: center; }
-        header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
-        header p { font-size: 1.1rem; opacity: 0.9; }
-        .container { max-width: 1000px; margin: 0 auto; padding: 2rem 1rem; }
-        h2 { color: #667eea; margin: 2rem 0 1rem; border-left: 4px solid #667eea; padding-left: 1rem; }
-        h3 { color: #764ba2; margin: 1.5rem 0 0.5rem; }
-        table { width: 100%; border-collapse: collapse; margin: 1rem 0; background: #1a1a1a; }
-        th, td { border: 1px solid #333; padding: 0.75rem; text-align: left; }
-        th { background: #667eea; color: white; font-weight: bold; }
-        tr:nth-child(even) { background: #262626; }
-        code { background: #1a1a1a; padding: 0.2rem 0.4rem; border-radius: 3px; font-family: 'Courier New', monospace; color: #ffb86c; }
-        pre { background: #1a1a1a; border-left: 4px solid #667eea; padding: 1rem; margin: 1rem 0; overflow-x: auto; border-radius: 4px; }
-        pre code { color: #a1efe4; padding: 0; background: none; }
-        .section { background: #1a1a1a; padding: 1.5rem; margin: 1.5rem 0; border-radius: 8px; }
-        .highlight { background: #2a2a2a; padding: 0.5rem 1rem; margin: 1rem 0; border-left: 3px solid #764ba2; }
-        .note { background: #1f3a3a; padding: 1rem; margin: 1rem 0; border-radius: 4px; border-left: 4px solid #00d4aa; }
-        footer { background: #0a0a0a; text-align: center; padding: 2rem; margin-top: 2rem; border-top: 1px solid #333; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0; }
-        .card { background: #262626; padding: 1rem; border-radius: 6px; border-top: 3px solid #667eea; }
-        .type-name { font-weight: bold; color: #667eea; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f0f10; color: #e6eef6; line-height: 1.6; padding-bottom: 4rem; }
+        header { background: linear-gradient(135deg, #5566ee 0%, #8a4ec0 100%); padding: 2rem; text-align: center; box-shadow: 0 6px 18px rgba(0,0,0,0.6); }
+        header h1 { font-size: 2.2rem; margin-bottom: 0.25rem; }
+        header p { opacity: 0.95; font-size: 1rem; }
+        .container { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
+        nav { display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:1rem; }
+        nav a { text-decoration:none; background:#131313; padding:0.5rem 0.75rem; border-radius:6px; color:#cfdcff; border-left:4px solid #667eea; font-size:0.95rem; }
+        .section { background: #141416; padding: 1.25rem; margin: 1rem 0; border-radius: 10px; border: 1px solid #222; }
+        h2 { color: #76a0ff; margin-bottom:0.6rem; font-size:1.25rem; border-left:4px solid #76a0ff; padding-left:0.75rem; }
+        h3 { color: #c092ff; margin:0.9rem 0 0.4rem; }
+        p { margin: 0.5rem 0; color:#dcecff; }
+        table { width:100%; border-collapse: collapse; margin:0.75rem 0; background:#101012; }
+        th, td { border:1px solid #222; padding:0.6rem; text-align:left; }
+        th { background:#667eea; color:#fff; font-weight:600; }
+        tr:nth-child(even) { background:#161618; }
+        code { background:#0e0f10; padding:0.15rem 0.4rem; border-radius:3px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace; color:#ffd580; }
+        pre { background:#0d0e10; border-left:4px solid #667eea; padding:1rem; margin:0.6rem 0; border-radius:6px; overflow:auto; color:#bfeee0; }
+        .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; margin-top:0.6rem; }
+        .card { background:#16161a; padding:0.9rem; border-radius:8px; border-top:3px solid #667eea; }
+        .note { background:#0f2b2a; padding:0.8rem; border-left:4px solid #00d4aa; border-radius:6px; margin:0.6rem 0; color:#dff7f0; }
+        footer { position:fixed; left:0; right:0; bottom:0; background:#070708; text-align:center; padding:0.9rem 0; border-top:1px solid #222; color:#9fb3ff; font-size:0.95rem; }
+        .toc { margin:0.6rem 0 1rem; padding:0.8rem; background:#0f1316; border-radius:8px; border-left:4px solid #8a4ec0; }
+        a.anchor { color:#9fb3ff; text-decoration:none; }
+        .small { font-size:0.95rem; color:#bcd2ff; }
     </style>
 </head>
 <body>
     <header>
-        <h1>Java Primitive Types Guide</h1>
-        <p>Complete reference for Java's 8 primitive data types</p>
+        <h1>Java Notes — Up to OOPs</h1>
+        <p>Concise and copyable Java reference covering basics → types → control flow → methods → classes → OOP concepts</p>
     </header>
 
     <div class="container">
-        <section class="section">
-            <h2>1. Overview of Java Primitive Types</h2>
-            <p>Java has 8 basic primitive types. They are called primitive because the values of these types are not objects in Java.</p>
-            <table>
-                <tr>
-                    <th>Type</th>
-                    <th>Size (bytes)</th>
-                    <th>Value Range</th>
-                    <th>Default Value</th>
-                </tr>
-                <tr>
-                    <td><span class="type-name">byte</span></td>
-                    <td>1</td>
-                    <td>-128 to 127</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td><span class="type-name">short</span></td>
-                    <td>2</td>
-                    <td>-32,768 to 32,767</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td><span class="type-name">int</span></td>
-                    <td>4</td>
-                    <td>-2,147,483,648 to 2,147,483,647</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td><span class="type-name">long</span></td>
-                    <td>8</td>
-                    <td>-9×10¹⁸ to 9×10¹⁸</td>
-                    <td>0L</td>
-                </tr>
-                <tr>
-                    <td><span class="type-name">float</span></td>
-                    <td>4</td>
-                    <td>-3.4×10³⁸ to 3.4×10³⁸</td>
-                    <td>0.0f</td>
-                </tr>
-                <tr>
-                    <td><span class="type-name">double</span></td>
-                    <td>8</td>
-                    <td>-1.7×10³⁰⁸ to 1.7×10³⁰⁸</td>
-                    <td>0.0d</td>
-                </tr>
-                <tr>
-                    <td><span class="type-name">boolean</span></td>
-                    <td>1</td>
-                    <td>true, false</td>
-                    <td>false</td>
-                </tr>
-                <tr>
-                    <td><span class="type-name">char</span></td>
-                    <td>2</td>
-                    <td>0 to 65,535</td>
-                    <td>''</td>
-                </tr>
-            </table>
-        </section>
+        <nav>
+            <a href="#overview">Overview</a>
+            <a href="#primitives">Primitive Types</a>
+            <a href="#operators">Operators</a>
+            <a href="#control">Control Flow</a>
+            <a href="#arrays">Arrays & Strings</a>
+            <a href="#methods">Methods</a>
+            <a href="#classes">Classes & Objects</a>
+            <a href="#oops">OOP Concepts</a>
+            <a href="#extras">Extras</a>
+        </nav>
 
-        <section class="section">
-            <h2>2. Integer Types</h2>
-            <h3>int (Integer)</h3>
-            <p>The most commonly used integer type. Used for whole numbers in everyday programming.</p>
-            <div class="highlight">Range: -2,147,483,648 to 2,147,483,647</div>
-            <pre>de>int n = "String".length();  // Returns length of string
-int[] array = {1, 2, 3};
-int size = array.length;     // Returns array length</code></pre>
-
-            <h3>long (Long Integer)</h3>
-            <p>Used for very large integer values. Requires 'L' suffix or casting.</p>
-            <div class="highlight">Range: -9×10¹⁸ to 9×10¹⁸</div>
-            <pre>de>long bigNumber = 1000000000000L;  // Must use 'L' suffix
-long result = 9223372036854775807L;</code></pre>
-
-            <h3>short (Short Integer)</h3>
-            <p>Rarely used. Only when memory optimization is critical. 2 bytes.</p>
-            <div class="highlight">Range: -32,768 to 32,767</div>
-
-            <h3>byte (Byte Integer)</h3>
-            <p>Smallest integer type. Most often used for storing large data blobs.</p>
-            <div class="highlight">Range: -128 to 127</div>
-            <pre>de>byte[] buffer = new byte[1024 * 1024];  // 1MB buffer for file I/O</code></pre>
-        </section>
-
-        <section class="section">
-            <h2>3. Floating-Point Types</h2>
-            <h3>double (Double-Precision)</h3>
-            <p>The standard floating-point type. Used in 99% of real number operations.</p>
-            <div class="highlight">Size: 8 bytes | Precision: 15-17 significant digits</div>
-            <pre>de>double pi = 3.14159265359;
-double result = 1234567890.1234567;</code></pre>
-
-            <h3>float (Single-Precision)</h3>
-            <p>Smaller than double but with less precision. Rarely used.</p>
-            <div class="highlight">Size: 4 bytes | Precision: 6-7 significant digits</div>
-            <pre>de>float value = (float) 123.456789;  // Results in 123.45679
-float a = (float) 12345.9999;       // Results in 12346.0</code></pre>
-
-            <div class="note">
-                <strong>Scientific Notation:</strong> Use E for exponents
-                <pre>de>double a = 1.5E3;      // 1500.0
-double b = 2.5E-2;     // 0.025</code></pre>
+        <section id="overview" class="section">
+            <h2>Overview</h2>
+            <p>Java is a statically typed, object-oriented language that runs on the JVM. Code is written in classes; execution begins at <code>public static void main(String[] args)</code>.</p>
+            <div class="toc">
+                <strong>Contents:</strong>
+                <ul class="small">
+                    <li>Primitive types, Operators, Control flow</li>
+                    <li>Arrays, Strings, Methods</li>
+                    <li>Classes & Objects, OOPs: Encapsulation, Inheritance, Polymorphism, Abstraction</li>
+                </ul>
             </div>
-
-            <h3>Infinity & NaN</h3>
-            <pre>de>System.out.println(100.0 / 0.0);     // Infinity
-System.out.println(-100.0 / 0.0);    // -Infinity
-System.out.println(0.0 / 0.0);       // NaN</code></pre>
         </section>
 
-        <section class="section">
-            <h2>4. char Type (Character)</h2>
-            <p>Stores characters using Unicode encoding. Also a numeric type!</p>
-            <div class="highlight">Size: 2 bytes | Range: 0 to 65,535</div>
-            <pre>de>char a = 'A';              // Direct character
-char b = 65;               // ASCII code for 'A'
-char c = 0x41;             // Hexadecimal for 'A'
-char d = 'A';         // Unicode for 'A'</code></pre>
-
-            <h3>Character Operations</h3>
-            <pre>de>char c = 'A';
-c++;  // Now 'B'
-System.out.println(c);     // Prints: B</code></pre>
-
-            <h3>Common Character Codes</h3>
+        <section id="primitives" class="section">
+            <h2>Primitive Types</h2>
+            <p>Java has 8 primitive types (not objects). Quick table:</p>
             <table>
-                <tr>
-                    <th>Characters</th>
-                    <th>Codes</th>
-                </tr>
-                <tr>
-                    <td>0-9</td>
-                    <td>48-57</td>
-                </tr>
-                <tr>
-                    <td>a-z</td>
-                    <td>97-122</td>
-                </tr>
-                <tr>
-                    <td>A-Z</td>
-                    <td>65-90</td>
-                </tr>
+                <tr><th>Type</th><th>Bytes</th><th>Range / Values</th><th>Default</th></tr>
+                <tr><td>byte</td><td>1</td><td>-128 to 127</td><td>0</td></tr>
+                <tr><td>short</td><td>2</td><td>-32,768 to 32,767</td><td>0</td></tr>
+                <tr><td>int</td><td>4</td><td>-2,147,483,648 to 2,147,483,647</td><td>0</td></tr>
+                <tr><td>long</td><td>8</td><td>-9.22E18 to 9.22E18</td><td>0L</td></tr>
+                <tr><td>float</td><td>4</td><td>~±3.4E38 (single)</td><td>0.0f</td></tr>
+                <tr><td>double</td><td>8</td><td>~±1.7E308 (double)</td><td>0.0d</td></tr>
+                <tr><td>boolean</td><td>1 (logical)</td><td>true / false</td><td>false</td></tr>
+                <tr><td>char</td><td>2</td><td>Unicode 0 to 65,535</td><td>'\u0000'</td></tr>
+            </table>
+
+            <h3>Example</h3>
+            <pre><code>// variables
+int age = 17;
+double gpa = 9.23;
+char grade = 'A';
+boolean isActive = true;
+long id = 1234567890123L;
+</code></pre>
+        </section>
+
+        <section id="operators" class="section">
+            <h2>Operators</h2>
+            <p>Common categories: arithmetic, assignment, comparison, logical, bitwise, ternary, instanceof.</p>
+
+            <h3>Examples</h3>
+            <pre><code>// arithmetic
+int a = 5 + 3 * 2;   // 11
+
+// assignment and compound
+a += 4;             // a = a + 4
+
+// comparison
+boolean b = (a > 10);
+
+// logical
+boolean c = (a > 5) && (b);
+
+// ternary
+int x = (a > 10) ? 1 : 0;
+
+// instanceof
+String s = "hi";
+boolean isStr = s instanceof String;
+</code></pre>
+        </section>
+
+        <section id="control" class="section">
+            <h2>Control Flow</h2>
+
+            <h3>If / Else</h3>
+            <pre><code>if (score >= 90) {
+    System.out.println("A");
+} else if (score >= 75) {
+    System.out.println("B");
+} else {
+    System.out.println("C");
+}
+</code></pre>
+
+            <h3>Switch (modern cases available since Java 14+)</h3>
+            <pre><code>int day = 3;
+switch (day) {
+    case 1 -> System.out.println("Mon");
+    case 2 -> System.out.println("Tue");
+    case 3 -> System.out.println("Wed");
+    default -> System.out.println("Other");
+}
+</code></pre>
+
+            <h3>Loops</h3>
+            <pre><code>// for
+for (int i = 0; i &lt; 5; i++) { ... }
+
+// enhanced for
+for (String name : names) { ... }
+
+// while / do-while
+while (condition) { ... }
+do { ... } while(condition);
+</code></pre>
+        </section>
+
+        <section id="arrays" class="section">
+            <h2>Arrays & Strings</h2>
+
+            <h3>Arrays</h3>
+            <pre><code>int[] arr = new int[5];
+int[] nums = {1,2,3,4};
+System.out.println(nums.length);
+</code></pre>
+
+            <h3>Multidimensional</h3>
+            <pre><code>int[][] mat = {
+    {1,2,3},
+    {4,5,6}
+};
+</code></pre>
+
+            <h3>Strings (immutable)</h3>
+            <pre><code>String s = "Hello";
+int len = s.length();
+String t = s.substring(1,4);   // "ell"
+String up = s.toUpperCase();
+String joined = String.join("-", "a","b");
+</code></pre>
+            <div class="note"><strong>Tip:</strong> Use <code>StringBuilder</code> for frequent mutable string operations to avoid creating many temporary objects.</div>
+        </section>
+
+        <section id="methods" class="section">
+            <h2>Methods (Functions)</h2>
+
+            <h3>Declaration & Usage</h3>
+            <pre><code>public class Util {
+    // static method
+    public static int add(int x, int y) {
+        return x + y;
+    }
+
+    // instance method
+    public String greet(String name) {
+        return "Hello " + name;
+    }
+}
+
+// call
+int sum = Util.add(4,5);
+Util u = new Util();
+String g = u.greet("Sudheendra");
+</code></pre>
+
+            <h3>Overloading</h3>
+            <pre><code>public int add(int a,int b) { ... }
+public double add(double a,double b) { ... }  // same name, different params
+</code></pre>
+        </section>
+
+        <section id="classes" class="section">
+            <h2>Classes & Objects — Basics</h2>
+            <p>Classes are blueprints for objects. Fields (state) + methods (behavior).</p>
+
+            <h3>Simple Class Example</h3>
+            <pre><code>public class Person {
+    // fields
+    private String name;
+    private int age;
+
+    // constructor
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // getter
+    public String getName() { return name; }
+
+    // setter
+    public void setName(String name) { this.name = name; }
+
+    // method
+    public void sayHi() {
+        System.out.println("Hi, I'm " + name);
+    }
+}
+
+// usage
+Person p = new Person("Asha", 20);
+p.sayHi();   // Hi, I'm Asha
+</code></pre>
+
+            <h3>Access Modifiers</h3>
+            <table>
+                <tr><th>Modifier</th><th>Visibility</th></tr>
+                <tr><td>public</td><td>anywhere</td></tr>
+                <tr><td>protected</td><td>package + subclasses</td></tr>
+                <tr><td>default (no modifier)</td><td>package only</td></tr>
+                <tr><td>private</td><td>class only</td></tr>
             </table>
         </section>
 
-        <section class="section">
-            <h2>5. boolean Type</h2>
-            <p>The simplest primitive type. Only two possible values.</p>
-            <pre>de>boolean isTrue = true;
-boolean isFalse = false;
-boolean result = (5 > 3);  // true</code></pre>
+        <section id="oops" class="section">
+            <h2>OOP Concepts</h2>
+            <p>Four pillars: <strong>Encapsulation</strong>, <strong>Inheritance</strong>, <strong>Polymorphism</strong>, <strong>Abstraction</strong>.</p>
+
+            <h3>Encapsulation</h3>
+            <p>Keep fields private, expose behavior through methods (getters/setters). Protects invariants.</p>
+            <pre><code>public class BankAccount {
+    private double balance;
+
+    public BankAccount(double b) { this.balance = b; }
+    public double getBalance() { return balance; }
+    public void deposit(double amt) {
+        if (amt &gt; 0) balance += amt;
+    }
+}
+</code></pre>
+
+            <h3>Inheritance</h3>
+            <p>One class extends another: re-use and subtype relationship.</p>
+            <pre><code>public class Animal {
+    public void speak() { System.out.println("..."); }
+}
+
+public class Dog extends Animal {
+    @Override
+    public void speak() { System.out.println("Woof"); }
+}
+</code></pre>
+
+            <h3>Polymorphism</h3>
+            <p>Same reference type, multiple implementations. Method overriding is run-time polymorphism.</p>
+            <pre><code>Animal a = new Dog();
+a.speak();  // "Woof" — Dog's override runs
+</code></pre>
+
+            <h3>Abstraction</h3>
+            <p>Hide complex implementation details. Achieved via abstract classes and interfaces.</p>
+            <pre><code>public interface Shape {
+    double area();
+}
+
+public class Circle implements Shape {
+    private double r;
+    public Circle(double r) { this.r = r; }
+    public double area() { return Math.PI * r * r; }
+}
+</code></pre>
+
+            <h3>Constructors & this / super</h3>
+            <pre><code>public class A {
+    public A() { System.out.println("A()"); }
+}
+public class B extends A {
+    public B() {
+        super();      // calls A()
+        System.out.println("B()");
+    }
+}
+</code></pre>
+
+            <h3>Method Overriding vs Overloading</h3>
+            <p><strong>Overriding</strong> — subclass changes behavior of superclass method (same signature). <strong>Overloading</strong> — same method name different parameters.</p>
+
+            <h3>final, static, abstract</h3>
+            <ul class="small">
+                <li><code>final</code> — prevents modification (final class, method or variable).</li>
+                <li><code>static</code> — class-level member shared by all instances.</li>
+                <li><code>abstract</code> — class/method must be implemented by subclass.</li>
+            </ul>
+
+            <h3>Example: Small OOP design</h3>
+            <pre><code>public abstract class Vehicle {
+    private String model;
+    public Vehicle(String m) { model = m; }
+    public String getModel() { return model; }
+    public abstract void drive();
+}
+
+public class Car extends Vehicle {
+    public Car(String m) { super(m); }
+    public void drive() { System.out.println("Car " + getModel() + " driving"); }
+}
+</code></pre>
         </section>
 
-        <section class="section">
-            <h2>6. Type Conversion</h2>
-            <h3>Implicit Conversion (Widening)</h3>
-            <p>Automatic conversion from smaller to larger type:</p>
-            <pre>de>int num = 100;
-long bigNum = num;         // Auto conversion
-double decimal = bigNum;   // Auto conversion</code></pre>
+        <section id="extras" class="section">
+            <h2>Extras — Helpful Notes</h2>
 
-            <h3>Explicit Conversion (Casting)</h3>
-            <p>Manual conversion from larger to smaller type:</p>
-            <pre>de>double d = 123.45;
-int num = (int) d;         // Results in 123 (loses decimals)
-float f = (float) d;       // Results in 123.45</code></pre>
-        </section>
-
-        <section class="section">
-            <h2>Quick Reference</h2>
             <div class="grid">
                 <div class="card">
-                    <h3>Integer Types</h3>
-                    <p><span class="type-name">byte</span> - 1 byte<br>
-                    <span class="type-name">short</span> - 2 bytes<br>
-                    <span class="type-name">int</span> - 4 bytes (common)<br>
-                    <span class="type-name">long</span> - 8 bytes (big)</p>
+                    <h3>Exception Handling</h3>
+                    <pre><code>try {
+    // risky
+} catch (IOException e) {
+    e.printStackTrace();
+} finally {
+    // always
+}
+</code></pre>
                 </div>
+
                 <div class="card">
-                    <h3>Floating-Point</h3>
-                    <p><span class="type-name">float</span> - 4 bytes<br>
-                    <span class="type-name">double</span> - 8 bytes (common)</p>
+                    <h3>Interfaces vs Abstract Classes</h3>
+                    <p class="small">Interface: multiple inheritance of type, default/static methods allowed. Abstract class: partial implementation, can hold state.</p>
                 </div>
+
                 <div class="card">
-                    <h3>Other</h3>
-                    <p><span class="type-name">boolean</span> - true/false<br>
-                    <span class="type-name">char</span> - Unicode character</p>
+                    <h3>Packages</h3>
+                    <p class="small">Organize classes: <code>package com.example.app;</code> Use imports to access other packages.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Common Collections</h3>
+                    <p class="small">ArrayList, LinkedList, HashSet, HashMap — part of <code>java.util</code>. Use generics: <code>List&lt;String&gt;</code>.</p>
                 </div>
             </div>
+
+            <h3>Small Cheatsheet</h3>
+            <table>
+                <tr><th>Topic</th><th>One-line</th></tr>
+                <tr><td>Default value</td><td>Numeric → 0, boolean → false, reference → null</td></tr>
+                <tr><td>String immutability</td><td>Concatenation creates new String object</td></tr>
+                <tr><td>== vs .equals()</td><td><code>==</code> compares references, <code>.equals()</code> compares content (override for classes)</td></tr>
+                <tr><td>Access</td><td>private &lt; package &lt; protected &lt; public</td></tr>
+            </table>
+        </section>
+
+        <section class="section">
+            <h2>Quick Practice Problems</h2>
+            <ol>
+                <li>Write a class <code>Student</code> with fields, constructor, getters and a method to calculate grade.</li>
+                <li>Implement an interface <code>Playable</code> and two classes <code>Guitar</code>, <code>Piano</code> that implement it.</li>
+                <li>Write a program to reverse a string without using library reverse methods.</li>
+                <li>Create <code>Shape</code> interface and implement <code>Circle</code>, <code>Rectangle</code> with area() method.</li>
+            </ol>
         </section>
 
     </div>
 
     <footer>
-        <p>Java Primitive Types Complete Guide | Fast & Easy Reference</p>
-        <p style="margin-top: 1rem; font-size: 0.9rem;">Last Updated: 2025</p>
+        Java Notes — Up to OOPs • Last Updated: 2025
     </footer>
 </body>
 </html>
