@@ -1,394 +1,342 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Java Notes — Up to OOPs</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f0f10; color: #e6eef6; line-height: 1.6; padding-bottom: 4rem; }
-        header { background: linear-gradient(135deg, #5566ee 0%, #8a4ec0 100%); padding: 2rem; text-align: center; box-shadow: 0 6px 18px rgba(0,0,0,0.6); }
-        header h1 { font-size: 2.2rem; margin-bottom: 0.25rem; }
-        header p { opacity: 0.95; font-size: 1rem; }
-        .container { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
-        nav { display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:1rem; }
-        nav a { text-decoration:none; background:#131313; padding:0.5rem 0.75rem; border-radius:6px; color:#cfdcff; border-left:4px solid #667eea; font-size:0.95rem; }
-        .section { background: #141416; padding: 1.25rem; margin: 1rem 0; border-radius: 10px; border: 1px solid #222; }
-        h2 { color: #76a0ff; margin-bottom:0.6rem; font-size:1.25rem; border-left:4px solid #76a0ff; padding-left:0.75rem; }
-        h3 { color: #c092ff; margin:0.9rem 0 0.4rem; }
-        p { margin: 0.5rem 0; color:#dcecff; }
-        table { width:100%; border-collapse: collapse; margin:0.75rem 0; background:#101012; }
-        th, td { border:1px solid #222; padding:0.6rem; text-align:left; }
-        th { background:#667eea; color:#fff; font-weight:600; }
-        tr:nth-child(even) { background:#161618; }
-        code { background:#0e0f10; padding:0.15rem 0.4rem; border-radius:3px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace; color:#ffd580; }
-        pre { background:#0d0e10; border-left:4px solid #667eea; padding:1rem; margin:0.6rem 0; border-radius:6px; overflow:auto; color:#bfeee0; }
-        .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; margin-top:0.6rem; }
-        .card { background:#16161a; padding:0.9rem; border-radius:8px; border-top:3px solid #667eea; }
-        .note { background:#0f2b2a; padding:0.8rem; border-left:4px solid #00d4aa; border-radius:6px; margin:0.6rem 0; color:#dff7f0; }
-        footer { position:fixed; left:0; right:0; bottom:0; background:#070708; text-align:center; padding:0.9rem 0; border-top:1px solid #222; color:#9fb3ff; font-size:0.95rem; }
-        .toc { margin:0.6rem 0 1rem; padding:0.8rem; background:#0f1316; border-radius:8px; border-left:4px solid #8a4ec0; }
-        a.anchor { color:#9fb3ff; text-decoration:none; }
-        .small { font-size:0.95rem; color:#bcd2ff; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Java OOP Explained — CodeGym + GeeksForGeeks Style</title>
+
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background:#0e0e10;
+        color:#e6e6f0;
+        display:flex;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        width:260px;
+        background:#141418;
+        height:100vh;
+        padding:20px;
+        border-right:1px solid #222;
+        position:fixed;
+        overflow-y:auto;
+    }
+
+    .sidebar h2 {
+        font-size:20px;
+        color:#76a0ff;
+        margin-bottom:10px;
+        border-left:4px solid #76a0ff;
+        padding-left:8px;
+    }
+
+    .sidebar a {
+        display:block;
+        color:#bcd2ff;
+        padding:8px;
+        margin:4px 0;
+        text-decoration:none;
+        border-radius:5px;
+        background:#1a1a20;
+    }
+    .sidebar a:hover { background:#23232a; }
+
+    /* Main content */
+    .content {
+        margin-left:280px;
+        padding:25px;
+        width:calc(100% - 280px);
+    }
+
+    h1 { color:#8a4ec0; margin-bottom:10px; }
+    h2 { color:#76a0ff; border-left:4px solid #76a0ff; padding-left:10px; margin:20px 0 10px; }
+    h3 { color:#c892ff; margin:12px 0 8px; }
+
+    p { margin:8px 0; color:#dce0f5; }
+
+    pre {
+        background:#101014;
+        padding:14px;
+        border-left:4px solid #667eea;
+        overflow-x:auto;
+        border-radius:6px;
+        margin:10px 0;
+        color:#b7ffe4;
+    }
+
+    .note {
+        background:#0f2b2b;
+        padding:10px;
+        border-left:4px solid #00d4aa;
+        border-radius:6px;
+        margin:12px 0;
+        color:#ddfff6;
+    }
+
+    table {
+        width:100%;
+        border-collapse:collapse;
+        margin:15px 0;
+    }
+
+    th, td {
+        padding:10px;
+        border:1px solid #333;
+    }
+
+    th {
+        background:#667eea;
+        color:white;
+    }
+
+    tr:nth-child(even) { background:#1d1d23; }
+</style>
 </head>
+
 <body>
-    <header>
-        <h1>Java Notes — Up to OOPs</h1>
-        <p>Concise and copyable Java reference covering basics → types → control flow → methods → classes → OOP concepts</p>
-    </header>
 
-    <div class="container">
-        <nav>
-            <a href="#overview">Overview</a>
-            <a href="#primitives">Primitive Types</a>
-            <a href="#operators">Operators</a>
-            <a href="#control">Control Flow</a>
-            <a href="#arrays">Arrays & Strings</a>
-            <a href="#methods">Methods</a>
-            <a href="#classes">Classes & Objects</a>
-            <a href="#oops">OOP Concepts</a>
-            <a href="#extras">Extras</a>
-        </nav>
+<!-- Sidebar -->
+<div class="sidebar">
+    <h2>Java OOP Lessons</h2>
+    <a href="#intro">Introduction</a>
+    <a href="#encap">Encapsulation</a>
+    <a href="#inherit">Inheritance</a>
+    <a href="#poly">Polymorphism</a>
+    <a href="#abst">Abstraction</a>
+    <a href="#practice">Practice Problems</a>
+    <a href="#solutions">Solutions</a>
+</div>
 
-        <section id="overview" class="section">
-            <h2>Overview</h2>
-            <p>Java is a statically typed, object-oriented language that runs on the JVM. Code is written in classes; execution begins at <code>public static void main(String[] args)</code>.</p>
-            <div class="toc">
-                <strong>Contents:</strong>
-                <ul class="small">
-                    <li>Primitive types, Operators, Control flow</li>
-                    <li>Arrays, Strings, Methods</li>
-                    <li>Classes & Objects, OOPs: Encapsulation, Inheritance, Polymorphism, Abstraction</li>
-                </ul>
-            </div>
-        </section>
+<!-- MAIN CONTENT -->
+<div class="content">
 
-        <section id="primitives" class="section">
-            <h2>Primitive Types</h2>
-            <p>Java has 8 primitive types (not objects). Quick table:</p>
-            <table>
-                <tr><th>Type</th><th>Bytes</th><th>Range / Values</th><th>Default</th></tr>
-                <tr><td>byte</td><td>1</td><td>-128 to 127</td><td>0</td></tr>
-                <tr><td>short</td><td>2</td><td>-32,768 to 32,767</td><td>0</td></tr>
-                <tr><td>int</td><td>4</td><td>-2,147,483,648 to 2,147,483,647</td><td>0</td></tr>
-                <tr><td>long</td><td>8</td><td>-9.22E18 to 9.22E18</td><td>0L</td></tr>
-                <tr><td>float</td><td>4</td><td>~±3.4E38 (single)</td><td>0.0f</td></tr>
-                <tr><td>double</td><td>8</td><td>~±1.7E308 (double)</td><td>0.0d</td></tr>
-                <tr><td>boolean</td><td>1 (logical)</td><td>true / false</td><td>false</td></tr>
-                <tr><td>char</td><td>2</td><td>Unicode 0 to 65,535</td><td>'\u0000'</td></tr>
-            </table>
+<h1 id="intro">Java OOP — Explained Like CodeGym + GeeksForGeeks</h1>
+<p>This is a complete OOP tutorial designed to make concepts extremely easy. Each topic contains:</p>
+<ul>
+    <li>✓ Clear Explanation</li>
+    <li>✓ Java example code</li>
+    <li>✓ Console output (GFG style)</li>
+    <li>✓ Practice problems (only inputs/outputs)</li>
+</ul>
 
-            <h3>Example</h3>
-            <pre><code>// variables
-int age = 17;
-double gpa = 9.23;
-char grade = 'A';
-boolean isActive = true;
-long id = 1234567890123L;
-</code></pre>
-        </section>
+<!-- 1. ENCAPSULATION -->
+<h2 id="encap">1. Encapsulation</h2>
+<p><strong>Definition:</strong> Binding data + methods together while restricting direct access to data members.</p>
 
-        <section id="operators" class="section">
-            <h2>Operators</h2>
-            <p>Common categories: arithmetic, assignment, comparison, logical, bitwise, ternary, instanceof.</p>
-
-            <h3>Examples</h3>
-            <pre><code>// arithmetic
-int a = 5 + 3 * 2;   // 11
-
-// assignment and compound
-a += 4;             // a = a + 4
-
-// comparison
-boolean b = (a > 10);
-
-// logical
-boolean c = (a > 5) && (b);
-
-// ternary
-int x = (a > 10) ? 1 : 0;
-
-// instanceof
-String s = "hi";
-boolean isStr = s instanceof String;
-</code></pre>
-        </section>
-
-        <section id="control" class="section">
-            <h2>Control Flow</h2>
-
-            <h3>If / Else</h3>
-            <pre><code>if (score >= 90) {
-    System.out.println("A");
-} else if (score >= 75) {
-    System.out.println("B");
-} else {
-    System.out.println("C");
-}
-</code></pre>
-
-            <h3>Switch (modern cases available since Java 14+)</h3>
-            <pre><code>int day = 3;
-switch (day) {
-    case 1 -> System.out.println("Mon");
-    case 2 -> System.out.println("Tue");
-    case 3 -> System.out.println("Wed");
-    default -> System.out.println("Other");
-}
-</code></pre>
-
-            <h3>Loops</h3>
-            <pre><code>// for
-for (int i = 0; i &lt; 5; i++) { ... }
-
-// enhanced for
-for (String name : names) { ... }
-
-// while / do-while
-while (condition) { ... }
-do { ... } while(condition);
-</code></pre>
-        </section>
-
-        <section id="arrays" class="section">
-            <h2>Arrays & Strings</h2>
-
-            <h3>Arrays</h3>
-            <pre><code>int[] arr = new int[5];
-int[] nums = {1,2,3,4};
-System.out.println(nums.length);
-</code></pre>
-
-            <h3>Multidimensional</h3>
-            <pre><code>int[][] mat = {
-    {1,2,3},
-    {4,5,6}
-};
-</code></pre>
-
-            <h3>Strings (immutable)</h3>
-            <pre><code>String s = "Hello";
-int len = s.length();
-String t = s.substring(1,4);   // "ell"
-String up = s.toUpperCase();
-String joined = String.join("-", "a","b");
-</code></pre>
-            <div class="note"><strong>Tip:</strong> Use <code>StringBuilder</code> for frequent mutable string operations to avoid creating many temporary objects.</div>
-        </section>
-
-        <section id="methods" class="section">
-            <h2>Methods (Functions)</h2>
-
-            <h3>Declaration & Usage</h3>
-            <pre><code>public class Util {
-    // static method
-    public static int add(int x, int y) {
-        return x + y;
-    }
-
-    // instance method
-    public String greet(String name) {
-        return "Hello " + name;
-    }
-}
-
-// call
-int sum = Util.add(4,5);
-Util u = new Util();
-String g = u.greet("Sudheendra");
-</code></pre>
-
-            <h3>Overloading</h3>
-            <pre><code>public int add(int a,int b) { ... }
-public double add(double a,double b) { ... }  // same name, different params
-</code></pre>
-        </section>
-
-        <section id="classes" class="section">
-            <h2>Classes & Objects — Basics</h2>
-            <p>Classes are blueprints for objects. Fields (state) + methods (behavior).</p>
-
-            <h3>Simple Class Example</h3>
-            <pre><code>public class Person {
-    // fields
+<h3>Example</h3>
+<pre>
+class Student {
     private String name;
     private int age;
 
-    // constructor
-    public Person(String name, int age) {
-        this.name = name;
-        this.age = age;
+    // Setter
+    public void setAge(int a){
+        if(a > 0) age = a;
     }
 
-    // getter
-    public String getName() { return name; }
+    // Getter
+    public int getAge() {
+        return age;
+    }
 
-    // setter
-    public void setName(String name) { this.name = name; }
+    public void setName(String n){
+        name = n;
+    }
 
-    // method
-    public void sayHi() {
-        System.out.println("Hi, I'm " + name);
+    public String getName(){
+        return name;
     }
 }
 
-// usage
-Person p = new Person("Asha", 20);
-p.sayHi();   // Hi, I'm Asha
-</code></pre>
-
-            <h3>Access Modifiers</h3>
-            <table>
-                <tr><th>Modifier</th><th>Visibility</th></tr>
-                <tr><td>public</td><td>anywhere</td></tr>
-                <tr><td>protected</td><td>package + subclasses</td></tr>
-                <tr><td>default (no modifier)</td><td>package only</td></tr>
-                <tr><td>private</td><td>class only</td></tr>
-            </table>
-        </section>
-
-        <section id="oops" class="section">
-            <h2>OOP Concepts</h2>
-            <p>Four pillars: <strong>Encapsulation</strong>, <strong>Inheritance</strong>, <strong>Polymorphism</strong>, <strong>Abstraction</strong>.</p>
-
-            <h3>Encapsulation</h3>
-            <p>Keep fields private, expose behavior through methods (getters/setters). Protects invariants.</p>
-            <pre><code>public class BankAccount {
-    private double balance;
-
-    public BankAccount(double b) { this.balance = b; }
-    public double getBalance() { return balance; }
-    public void deposit(double amt) {
-        if (amt &gt; 0) balance += amt;
+public class Main {
+    public static void main(String[] args){
+        Student s = new Student();
+        s.setName("Arun");
+        s.setAge(20);
+        System.out.println(s.getName());
+        System.out.println(s.getAge());
     }
 }
-</code></pre>
+</pre>
 
-            <h3>Inheritance</h3>
-            <p>One class extends another: re-use and subtype relationship.</p>
-            <pre><code>public class Animal {
-    public void speak() { System.out.println("..."); }
+<h3>Console Output (GFG Style)</h3>
+<pre>
+Arun
+20
+</pre>
+
+<div class="note">
+    Encapsulation protects data and avoids misuse of variables.
+</div>
+
+<!-- 2. INHERITANCE -->
+<h2 id="inherit">2. Inheritance</h2>
+<p>Inheritance allows a class to acquire properties of another class. Use <code>extends</code>.</p>
+
+<h3>Example</h3>
+<pre>
+class Animal {
+    void eat() { System.out.println("Eating..."); }
 }
 
-public class Dog extends Animal {
-    @Override
-    public void speak() { System.out.println("Woof"); }
+class Dog extends Animal {
+    void bark() { System.out.println("Barking..."); }
 }
-</code></pre>
 
-            <h3>Polymorphism</h3>
-            <p>Same reference type, multiple implementations. Method overriding is run-time polymorphism.</p>
-            <pre><code>Animal a = new Dog();
-a.speak();  // "Woof" — Dog's override runs
-</code></pre>
+public class Main {
+    public static void main(String[] args){
+        Dog d = new Dog();
+        d.eat();
+        d.bark();
+    }
+}
+</pre>
 
-            <h3>Abstraction</h3>
-            <p>Hide complex implementation details. Achieved via abstract classes and interfaces.</p>
-            <pre><code>public interface Shape {
+<h3>Output</h3>
+<pre>
+Eating...
+Barking...
+</pre>
+
+<!-- 3. POLYMORPHISM -->
+<h2 id="poly">3. Polymorphism</h2>
+<p>Same method name → different behaviors.</p>
+
+<h3>Method Overloading</h3>
+<pre>
+class Maths {
+    int add(int a, int b){
+        return a + b;
+    }
+    double add(double a, double b){
+        return a + b;
+    }
+}
+</pre>
+
+<h3>Method Overriding (Runtime Polymorphism)</h3>
+<pre>
+class Animal {
+    void sound(){
+        System.out.println("Some sound");
+    }
+}
+
+class Cat extends Animal {
+    void sound(){
+        System.out.println("Meow");
+    }
+}
+
+public class Main {
+    public static void main(String[] args){
+        Animal a = new Cat();
+        a.sound();
+    }
+}
+</pre>
+
+<h3>Output</h3>
+<pre>
+Meow
+</pre>
+
+<!-- 4. ABSTRACTION -->
+<h2 id="abst">4. Abstraction</h2>
+<p>Hiding complex implementation and showing only necessary details.</p>
+
+<h3>Abstract Class Example</h3>
+<pre>
+abstract class Vehicle {
+    abstract void start();
+}
+
+class Car extends Vehicle {
+    void start(){
+        System.out.println("Car starts with key");
+    }
+}
+</pre>
+
+<h3>Interface Example</h3>
+<pre>
+interface Shape {
     double area();
 }
 
-public class Circle implements Shape {
-    private double r;
-    public Circle(double r) { this.r = r; }
-    public double area() { return Math.PI * r * r; }
-}
-</code></pre>
-
-            <h3>Constructors & this / super</h3>
-            <pre><code>public class A {
-    public A() { System.out.println("A()"); }
-}
-public class B extends A {
-    public B() {
-        super();      // calls A()
-        System.out.println("B()");
+class Circle implements Shape {
+    public double area(){
+        return 3.14 * 5 * 5;
     }
 }
-</code></pre>
+</pre>
 
-            <h3>Method Overriding vs Overloading</h3>
-            <p><strong>Overriding</strong> — subclass changes behavior of superclass method (same signature). <strong>Overloading</strong> — same method name different parameters.</p>
+<h3>Output</h3>
+<pre>
+Car starts with key
+78.5
+</pre>
 
-            <h3>final, static, abstract</h3>
-            <ul class="small">
-                <li><code>final</code> — prevents modification (final class, method or variable).</li>
-                <li><code>static</code> — class-level member shared by all instances.</li>
-                <li><code>abstract</code> — class/method must be implemented by subclass.</li>
-            </ul>
+<!-- PRACTICE SECTION -->
+<h2 id="practice">Practice Problems (GeeksForGeeks Style)</h2>
 
-            <h3>Example: Small OOP design</h3>
-            <pre><code>public abstract class Vehicle {
-    private String model;
-    public Vehicle(String m) { model = m; }
-    public String getModel() { return model; }
-    public abstract void drive();
-}
+<h3>Q1: Encapsulation</h3>
+<pre>
+Input:
+Rahul
+89
 
-public class Car extends Vehicle {
-    public Car(String m) { super(m); }
-    public void drive() { System.out.println("Car " + getModel() + " driving"); }
-}
-</code></pre>
-        </section>
+Output:
+Name: Rahul
+Marks: 89
+Passed
+</pre>
 
-        <section id="extras" class="section">
-            <h2>Extras — Helpful Notes</h2>
+<h3>Q2: Inheritance</h3>
+<pre>
+Input:
+Car
 
-            <div class="grid">
-                <div class="card">
-                    <h3>Exception Handling</h3>
-                    <pre><code>try {
-    // risky
-} catch (IOException e) {
-    e.printStackTrace();
-} finally {
-    // always
-}
-</code></pre>
-                </div>
+Output:
+Car Moves
+Car Stops
+</pre>
 
-                <div class="card">
-                    <h3>Interfaces vs Abstract Classes</h3>
-                    <p class="small">Interface: multiple inheritance of type, default/static methods allowed. Abstract class: partial implementation, can hold state.</p>
-                </div>
+<h3>Q3: Polymorphism</h3>
+<pre>
+Input:
+Dog
 
-                <div class="card">
-                    <h3>Packages</h3>
-                    <p class="small">Organize classes: <code>package com.example.app;</code> Use imports to access other packages.</p>
-                </div>
+Output:
+Dog Barks
+</pre>
 
-                <div class="card">
-                    <h3>Common Collections</h3>
-                    <p class="small">ArrayList, LinkedList, HashSet, HashMap — part of <code>java.util</code>. Use generics: <code>List&lt;String&gt;</code>.</p>
-                </div>
-            </div>
+<h3>Q4: Abstraction</h3>
+<pre>
+Input:
+Circle
+5
 
-            <h3>Small Cheatsheet</h3>
-            <table>
-                <tr><th>Topic</th><th>One-line</th></tr>
-                <tr><td>Default value</td><td>Numeric → 0, boolean → false, reference → null</td></tr>
-                <tr><td>String immutability</td><td>Concatenation creates new String object</td></tr>
-                <tr><td>== vs .equals()</td><td><code>==</code> compares references, <code>.equals()</code> compares content (override for classes)</td></tr>
-                <tr><td>Access</td><td>private &lt; package &lt; protected &lt; public</td></tr>
-            </table>
-        </section>
+Output:
+78.5
+</pre>
 
-        <section class="section">
-            <h2>Quick Practice Problems</h2>
-            <ol>
-                <li>Write a class <code>Student</code> with fields, constructor, getters and a method to calculate grade.</li>
-                <li>Implement an interface <code>Playable</code> and two classes <code>Guitar</code>, <code>Piano</code> that implement it.</li>
-                <li>Write a program to reverse a string without using library reverse methods.</li>
-                <li>Create <code>Shape</code> interface and implement <code>Circle</code>, <code>Rectangle</code> with area() method.</li>
-            </ol>
-        </section>
+<h3>Q5: Polymorphism — Payment</h3>
+<pre>
+Input:
+UPI
 
-    </div>
+Output:
+Payment Done via UPI
+</pre>
 
-    <footer>
-        Java Notes — Up to OOPs • Last Updated: 2025
-    </footer>
+<!-- SOLUTIONS -->
+<h2 id="solutions">Solutions (Full Code)</h2>
+<p>Here you can paste the final ready-made solutions for all practice problems.</p>
+
+</div>
 </body>
 </html>
